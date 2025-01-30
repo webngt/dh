@@ -1,0 +1,7 @@
+seaf.self:
+  - flix.home_cinema
+  - flix.consumers
+  - flix.network
+  - flix.lan
+  - flix.cluster_virtualization
+  

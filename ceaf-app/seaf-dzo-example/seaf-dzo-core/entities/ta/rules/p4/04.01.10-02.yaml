@@ -1,0 +1,22 @@
+rules:
+  validators:
+    sber.standards.v3.part4.4_01_10-02:
+      uid: TACIR_2-Ч04.01.10-02
+      description: >
+        Наличие (за исключением систем объектного хранения) встроенного механизма резервного копирования и восстановления данных (snapshot, clone) без необходимости прекращения работы приложения.
+      correction: >
+#todo дописать корректировку для TACIR_2-Ч04.01.10-02
+      title: TACIR_2-Ч04.01.10-02
+      source: >
+        (
+          $metal := $."seaf.ta.components.hw_storage";
+          [$metal.$spread().(
+            $storage_console := $[$not($exists(*.sber.snapshot_lic))].$keys();
+            $storage_console.{
+              "uid": "sber.standards.v3.p4." & $self.uid & "." & "\"" & $ & "\"",
+              "title": $self.title & " " & $,
+              "correction": $self.correction,
+              "description": $self.description & $
+            };       
+          )]
+        )

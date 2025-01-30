@@ -1,0 +1,56 @@
+# Описание интеграций сервисов и компонентов
+seaf.app.integration_specifications:
+
+  group.standards:
+    title: Стандарты, принятые на уровне Группы
+
+  group.standards.oauth:
+    description: Протокол OAuth авторизации
+    title: OAuth авторизация
+    interface_standard_type: Универсальный интерфейс/Индустриальный стандарт
+    technologies:
+      - OAuth
+      - HTTP
+
+  group.standards.smartpay:
+    description: Протокол платежей
+    title: SmartPay Оплата
+    interface_standard_type: Универсальный интерфейс/Индустриальный стандарт
+    technologies:
+      - HTTP
+
+seaf.app.integrations:
+  flix.home_cinema.oauth:
+    title: Авторизация
+    description: Авторизация в сервисе
+    from: flix.home_cinema.catalog.app
+    to: flix.home_cinema.auth
+    sber:
+      status: Используется
+      async: Ложно
+      technical-use: По запросу
+    specifications:
+      - group.standards.oauth
+
+  flix.home_cinema.payments:
+    title: Платежи
+    description: Сервис оплаты
+    from: flix.home_cinema.payments
+    to: flix.home_cinema.auth
+    sber:
+      status: Используется
+      async: Ложно
+      technical-use: По запросу
+    specifications:
+      - group.standards.smartpay
+
+  flix.home_cinema.gate_payments:
+    title: Платежи
+    description: Проведение оплаты через шлюз
+    from: alfa.payment_gate
+    to: flix.home_cinema.payments
+    data-objects:
+#      - payments.data_objects.payment
+      - flix.fl.payment
+    sber:
+      status: Используется

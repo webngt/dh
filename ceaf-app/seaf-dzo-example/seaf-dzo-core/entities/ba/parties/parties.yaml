@@ -1,0 +1,47 @@
+entities:
+
+  seaf.ba.parties:
+    schema:
+      patternProperties:
+        "[a-zA-Z0-9_]*(\\.[a-zA-Z0-9_]*)*$":
+          properties:
+            has_interest:
+              title: Интересующие продукты
+              description: Продукты потребляемые или потенциально интересные Участнику
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    title: Тип связи
+                    description: Более точная спецификация связи "заинтересован"
+                    type: string
+                    enum:
+                      - Интересуется
+                      - Потребляет
+                required:
+                  - type
+            sber:
+              type: object
+              additionalProperties: false
+              properties:
+                id:
+                  type: string
+                  title: Идентификатор участника
+                type:
+                  title: Тип клиентов
+                  enum:
+                    - Физические лица
+                    - Микро/Малый бизнес
+                    - Крупный и средний бизнес
+                    - Крупнейшие клиенты и финансовые институты
+                    - Сотрудники компании / компаний Группы
+                count:
+                  title: Количество клиентов
+                  type: integer
+                measure:
+                  title: Ед. измерения количественной оценки клиентов
+                  type: string
+              required:
+                - type
+        

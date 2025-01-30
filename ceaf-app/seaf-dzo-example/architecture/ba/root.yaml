@@ -1,0 +1,12 @@
+imports:
+
+  - self.yaml
+  - parties.yaml
+  - products.yaml
+  - processes.yaml
+
+  # Отключено до разработки соответствующих расширений
+  # - resources.yaml
+  # - capabilities.yaml
+
+  #todo Выпилить или переписать ридми

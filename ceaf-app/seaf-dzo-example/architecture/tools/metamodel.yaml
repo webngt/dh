@@ -1,0 +1,157 @@
+# Конфигурация рендеринга матемодели репозитория
+mm_discovery.stalker:
+  flix.overview:
+    title: Общая карта
+    location: Метамодель/Общая метамодель
+    nodes:
+      seaf:
+        title: SEAF
+      seaf.ta:
+        title: Техническая архитектура
+      seaf.ta.components:
+        title: Компоненты технической архитектуры
+      seaf.ta.services:
+        title: Сервисы технической архитектуры
+      seaf.ta.reverse:
+        title: Реверс из облаков
+      seaf.ta.reverse.cloud_ru:
+        title: Реверс из SberCloud
+      seaf.ta.reverse.cloud_ru.advanced:
+        title: Платформа Advanced
+      seaf.ta.reverse.cloud_ru.enterprise:
+        title: Платформа Enterprise
+      seaf.app:
+        title: Прикладная архитектура
+      seaf.ia:
+        title: Информационная архитектура
+      seaf.ba:
+        title: Бизнес-архитектура
+      seaf.change:
+        title: Управление изменениями
+    domains:
+      - "**" # Отражаем все домены
+    hooks:
+      after: >
+        (
+            $result := result;
+            $translateId := function($id) {( 
+                $result := $lookup({
+                    "aspects": "seaf.app.aspects",
+                    "components": "seaf.app.components"
+                }, $id);
+                $result ? $result : $id;
+            )};  
+            $merge([
+                $result,
+                {
+                    "nodes": $merge($result.nodes.$spread().(
+                        $id := $keys()[0];
+                        {
+                            $translateId($id): $.*    
+                        }       
+                    )),
+                    "links": [$result.links.(
+                        $merge([$, {"from": $translateId(from), "to": $translateId(to)}]);
+                    )]       
+                }       
+        
+            ]);
+        )
+  flix.applcation:
+    title: Прикладная архитектура
+    location: Метамодель/Прикладная
+    nodes:
+      seaf:
+        title: SEAF
+      seaf.app:
+        title: Прикладная архитектура
+    domains:
+      - aspects
+      - components
+      - seaf.change.requirements
+      - seaf.app.**
+  flix.change:
+    title: Управление изменениями
+    location: Метамодель/Управление изменениями
+    nodes:
+      seaf:
+        title: SEAF
+      seaf.change:
+        title: Управление изменениями
+    domains:
+      - seaf.change.**
+  flix.technical:
+    title: Техническая архитектура
+    location: Метамодель/Техническая
+    nodes:
+      seaf:
+        title: SEAF
+      seaf.ta:
+        title: Техническая архитектура
+      seaf.ta.components:
+        title: Компоненты технической архитектуры
+      seaf.ta.services:
+        title: Сервисы технической архитектуры
+      seaf.ta.reverse:
+        title: Реверс из облаков
+      seaf.ta.reverse.cloud_ru:
+        title: Реверс из SberCloud
+      seaf.ta.reverse.cloud_ru.advanced:
+        title: Платформа Advanced
+      seaf.ta.reverse.cloud_ru.enterprise:
+        title: Платформа Enterprise
+    domains:
+      - seaf.ta.**
+  flix.technical.k8s:
+    title: Kubernetes
+    location: Метамодель/Техническая/Kubernetes
+    nodes:
+      seaf:
+        title: SEAF
+      seaf.ta:
+        title: Kubernetes Архитектура
+    domains:
+      - seaf.ta.services.k8s
+      - seaf.ta.components.k8s_deployment
+      - seaf.ta.components.k8s_pod
+      - seaf.ta.components.k8s_container
+      - seaf.ta.components.k8s_image
+      - seaf.ta.services.network
+      - seaf.ta.components.server
+      - seaf.ta.services.dc_az
+  flix.technical_reverse_adv:
+    title: Техническая архитектура Advanced Reverse
+    location: Метамодель/Техническая/Reverse/Advanced
+    nodes:
+      seaf.ta.reverse.cloud_ru.advanced:
+        title: Платформа Advanced
+    domains:
+      - seaf.ta.reverse.cloud_ru.advanced.**
+  flix.technical_reverse_ent:
+    title: Техническая архитектура Enterprise Reverse
+    location: Метамодель/Техническая/Reverse/Enterprise
+    nodes:
+      seaf.ta.reverse.cloud_ru.enterprise:
+        title: Платформа Enterprise
+    domains:
+      - seaf.ta.reverse.cloud_ru.enterprise.**
+  flix.ia:
+    title: Информационная архитектура
+    location: Метамодель/Информационная архитектура
+    nodes:
+      seaf:
+        title: SEAF
+      seaf.ia:
+        title: Информационная архитектура
+    domains:
+      - seaf.ia.**
+  flix.ba:
+    title: Бизнес-архитектура
+    location: Метамодель/Бизнес-архитектура
+    nodes:
+      seaf:
+        title: SEAF
+      seaf.ba:
+        title: Бизнес-архитектура
+    domains:
+      - seaf.ba.**

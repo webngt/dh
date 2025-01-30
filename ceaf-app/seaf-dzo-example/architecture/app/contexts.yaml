@@ -1,0 +1,23 @@
+# Контексты прикладной архитектуры
+contexts:
+  flix:
+    title: Прикладные сервисы Участника Фликс (зависимости)
+    location: Прикладные сервисы/Фликс (зависимости)
+    components:
+      - flix
+      - flix.**
+
+  flix_integrations:
+    title: Прикладные сервисы Участника Фликс (интеграции)
+    location: Прикладные сервисы/Фликс (интеграции)
+    presentation: integration
+    components:
+      - flix
+      - flix.**
+
+  alfa:
+    title: Прикладные сервисы Участника Альфа
+    location: Прикладные сервисы/Альфа
+    components:
+      - alfa
+      - alfa.**

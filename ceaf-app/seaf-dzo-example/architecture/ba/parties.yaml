@@ -1,0 +1,70 @@
+seaf.ba.parties:
+
+  group:
+    title: Группа
+
+  alfa:
+    title: Альфа
+    relates_to:
+      - group
+
+  ezon:
+    title: e-Zone
+    relates_to:
+      - group
+
+  flix:
+    title: Фликс
+    relates_to:
+      - group
+
+
+
+  flix.content_matter_buz:
+    title: Контентно-зависимый бизнес
+    has_interest:
+      - id: flix.media_platform_saas
+        type: Потребляет
+    sber:
+      type: Крупный и средний бизнес
+
+
+#  group.sosenka:
+#    title: Сосенка
+
+  flix.customers.fl:
+    title: ФЛ
+
+  flix.team:
+    title: Внутренние сотрудники Фликс
+    is_part_of: flix
+
+  flix.customers.fl.web:
+    title: Пользователи веб-приложения
+    is_part_of: flix.customers.fl
+    has_interest:
+      - id: flix.home_cinema
+        type: Потребляет
+    sber:
+      type: Физические лица
+
+
+  flix.customers.fl.ios_app:
+    title: Пользователи мобильного приложения
+    is_part_of: flix.customers.fl
+    has_interest:
+      - id: flix.home_cinema
+        type: Потребляет
+      - id: flix.support
+        type: Интересуется
+    sber:
+      type: Физические лица
+
+  flix.team.product:
+    title: Продуктовая команда Фликс
+    is_part_of: flix.team
+
+  flix.team.support:
+    title: Команда сопровождения Фликс
+    is_part_of: flix.team
+
