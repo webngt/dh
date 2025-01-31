@@ -1,7 +1,13 @@
-# Dochub Sandbox
+# Dockhub build and run
 
-## Clone dochub
+## `build`
 
 ```bash
-git clone https://github.com/DocHubTeam/DocHub.git
+make docker-build
+```
+
+## `run`
+
+```bash
+make run
 ```
