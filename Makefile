@@ -4,8 +4,8 @@ seaf-archtool-core:
 	@git clone \
 	--depth=1 \
 	--branch=master \
-	https://github.com/DocHubTeam/DocHub.git dochub && \
-	rm -rf ./dochub/.git
+	https://gitverse.ru/seafteam/seaf-archtool-core.git && \
+	rm -rf ./seaf-archtool-core/.git
 
 docker-build: seaf-archtool-core
 	@docker build \
@@ -22,5 +22,4 @@ run:
 	docker.io/alexander894/dochub:0.0.1
 
 clean:
-	@-rm -rf dochub
-	@-rm -rf ceaf-app
+	@-rm -rf seaf-archtool-core
